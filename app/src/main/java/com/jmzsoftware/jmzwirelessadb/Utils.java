@@ -2,7 +2,9 @@ package com.jmzsoftware.jmzwirelessadb;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
+import android.preference.PreferenceManager;
 
 import eu.chainfire.libsuperuser.Shell;
 
@@ -35,6 +37,9 @@ public class Utils {
         int ip = mWifiManager.getConnectionInfo().getIpAddress();
         return (ip & 0xFF) + "." + ((ip >> 8) & 0xFF) + "." + ((ip >> 16) & 0xFF) + "."
                 + ((ip >> 24) & 0xFF);
+    }
 
+    public static SharedPreferences preferences(Context context){
+        return PreferenceManager.getDefaultSharedPreferences(context);
     }
 }

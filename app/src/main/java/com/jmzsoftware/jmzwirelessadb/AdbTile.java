@@ -13,14 +13,14 @@ import android.widget.Toast;
 import static com.jmzsoftware.jmzwirelessadb.Utils.disableAdb;
 import static com.jmzsoftware.jmzwirelessadb.Utils.enableAdb;
 import static com.jmzsoftware.jmzwirelessadb.Utils.getIP;
+import static com.jmzsoftware.jmzwirelessadb.Utils.preferences;
 
 @TargetApi(Build.VERSION_CODES.N)
 public class AdbTile extends TileService {
 
     @Override
     public void onTileAdded(){
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
-                getApplicationContext());
+        SharedPreferences prefs = preferences(getApplicationContext());
         if (!prefs.contains("adb_tile")){
             prefs.edit().putInt("adb_tile",0).apply();
         }
@@ -39,9 +39,8 @@ public class AdbTile extends TileService {
     @Override
     public void onClick(){
         Tile tile = getQsTile();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
-                getApplicationContext());
         Context context = getApplicationContext();
+        SharedPreferences prefs = preferences(context);
         switch (prefs.getInt("adb_tile",0)){
             case 0:
                 enableAdb();

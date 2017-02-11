@@ -32,6 +32,7 @@ import android.widget.TextView;
 import static com.jmzsoftware.jmzwirelessadb.Utils.disableAdb;
 import static com.jmzsoftware.jmzwirelessadb.Utils.enableAdb;
 import static com.jmzsoftware.jmzwirelessadb.Utils.getIP;
+import static com.jmzsoftware.jmzwirelessadb.Utils.preferences;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -52,17 +53,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (adb.getText() == getString(R.string.disable_adb)) {
-                    disableAdb();
-                    textView.setText("");
-                    adb.setText(R.string.enable_adb);
+                    if (preferences(context).getInt("adb_title",0)==1){
+                        adbDisabled();
+                    } else {
+                        enableAdb();
+                        adbEnabled();
+                    }
                 } else {
                     enableAdb();
-                    textView.setText(String.format("Run 'adb connect %s:5555' in terminal", getIP(context)));
-                    adb.setText(R.string.disable_adb);
+                    adbEnabled();
                 }
             }
         });
 
         textView = (TextView) findViewById(R.id.textView);
+    }
+    private void adbDisabled(){
+        textView.setText("");
+        adb.setText(R.string.enable_adb);
+    }
+
+    private void adbEnabled(){
+        textView.setText(String.format("Run 'adb connect %s:5555' in terminal", getIP(context)));
+        adb.setText(R.string.disable_adb);
     }
 }
