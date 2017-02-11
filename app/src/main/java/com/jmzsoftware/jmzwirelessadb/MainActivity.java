@@ -29,7 +29,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import eu.chainfire.libsuperuser.Shell;
+import static com.jmzsoftware.jmzwirelessadb.Utils.disableAdb;
+import static com.jmzsoftware.jmzwirelessadb.Utils.enableAdb;
+import static com.jmzsoftware.jmzwirelessadb.Utils.getIP;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,42 +57,12 @@ public class MainActivity extends AppCompatActivity {
                     adb.setText(R.string.enable_adb);
                 } else {
                     enableAdb();
-                    textView.setText(String.format("Run 'adb connect %s:5555' in terminal", getIP()));
+                    textView.setText(String.format("Run 'adb connect %s:5555' in terminal", getIP(context)));
                     adb.setText(R.string.disable_adb);
                 }
             }
         });
 
         textView = (TextView) findViewById(R.id.textView);
-    }
-
-    public void enableAdb () {
-        final String[] commands = { "setprop service.adb.tcp.port 5555", "stop adbd", "start adbd" };
-        Thread runSu = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Shell.SU.run(commands);
-            }
-        });
-        runSu.start();
-    }
-
-    public void disableAdb () {
-        final String[] commands = { "stop adbd" };
-        Thread runSu = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Shell.SU.run(commands);
-            }
-        });
-        runSu.start();
-    }
-
-    public String getIP () {
-        WifiManager mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        int ip = mWifiManager.getConnectionInfo().getIpAddress();
-        return (ip & 0xFF) + "." + ((ip >> 8) & 0xFF) + "." + ((ip >> 16) & 0xFF) + "."
-                + ((ip >> 24) & 0xFF);
-
     }
 }
