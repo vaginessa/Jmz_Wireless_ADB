@@ -1,8 +1,7 @@
 /**
- * Jmz Wireless ADB
  *
  * Copyright 2016 by Jmz Software <support@jmzsoftware.com>
- *
+ * Copyright 2017 by Harsh Shandilya <msfjarvis@gmail.com>
  *
  * Some open source application is free software: you can redistribute
  * it and/or modify it under the terms of the GNU General Public
@@ -19,7 +18,7 @@
  *
  */
 
-package com.jmzsoftware.jmzwirelessadb;
+package me.msfjarvis.wirelessadb;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;
@@ -29,10 +28,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import static com.jmzsoftware.jmzwirelessadb.Utils.disableAdb;
-import static com.jmzsoftware.jmzwirelessadb.Utils.enableAdb;
-import static com.jmzsoftware.jmzwirelessadb.Utils.getIP;
-import static com.jmzsoftware.jmzwirelessadb.Utils.preferences;
+import static me.msfjarvis.wirelessadb.Utils.disableAdb;
+import static me.msfjarvis.wirelessadb.Utils.enableAdb;
+import static me.msfjarvis.wirelessadb.Utils.getIP;
+import static me.msfjarvis.wirelessadb.Utils.preferences;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.jmzsoftware.jmzwirelessadb;
+package me.msfjarvis.wirelessadb;
 
 
 import android.content.Context;

@@ -1,4 +1,4 @@
-package com.jmzsoftware.jmzwirelessadb;
+package me.msfjarvis.wirelessadb;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -10,10 +10,10 @@ import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.widget.Toast;
 
-import static com.jmzsoftware.jmzwirelessadb.Utils.disableAdb;
-import static com.jmzsoftware.jmzwirelessadb.Utils.enableAdb;
-import static com.jmzsoftware.jmzwirelessadb.Utils.getIP;
-import static com.jmzsoftware.jmzwirelessadb.Utils.preferences;
+import static me.msfjarvis.wirelessadb.Utils.disableAdb;
+import static me.msfjarvis.wirelessadb.Utils.enableAdb;
+import static me.msfjarvis.wirelessadb.Utils.getIP;
+import static me.msfjarvis.wirelessadb.Utils.preferences;
 
 @TargetApi(Build.VERSION_CODES.N)
 public class AdbTile extends TileService {
