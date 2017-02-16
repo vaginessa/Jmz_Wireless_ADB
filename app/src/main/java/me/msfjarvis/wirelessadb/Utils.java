@@ -10,6 +10,8 @@ import eu.chainfire.libsuperuser.Shell;
 
 public class Utils {
 
+    public static final String ADB_TILE_PREF_KEY = "adb_tile";
+
     public static void enableAdb () {
         final String[] commands = { "setprop service.adb.tcp.port 5555", "stop adbd", "start adbd" };
         Thread runSu = new Thread(new Runnable() {

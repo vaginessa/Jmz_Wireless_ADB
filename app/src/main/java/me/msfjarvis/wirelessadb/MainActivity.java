@@ -32,7 +32,7 @@ import static me.msfjarvis.wirelessadb.Utils.disableAdb;
 import static me.msfjarvis.wirelessadb.Utils.enableAdb;
 import static me.msfjarvis.wirelessadb.Utils.getIP;
 import static me.msfjarvis.wirelessadb.Utils.preferences;
-
+import static me.msfjarvis.wirelessadb.Utils.ADB_TILE_PREF_KEY;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (adb.getText() == getString(R.string.disable_adb)) {
-                    if (preferences(context).getInt("adb_title",0)==1){
+                    if (preferences(context).getInt(ADB_TILE_PREF_KEY,0)==1){
                         adbDisabled();
                     } else {
                         enableAdb();

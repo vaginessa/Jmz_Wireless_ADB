@@ -14,6 +14,7 @@ import static me.msfjarvis.wirelessadb.Utils.disableAdb;
 import static me.msfjarvis.wirelessadb.Utils.enableAdb;
 import static me.msfjarvis.wirelessadb.Utils.getIP;
 import static me.msfjarvis.wirelessadb.Utils.preferences;
+import static me.msfjarvis.wirelessadb.Utils.ADB_TILE_PREF_KEY;
 
 @TargetApi(Build.VERSION_CODES.N)
 public class AdbTile extends TileService {
@@ -21,8 +22,8 @@ public class AdbTile extends TileService {
     @Override
     public void onTileAdded(){
         SharedPreferences prefs = preferences(getApplicationContext());
-        if (!prefs.contains("adb_tile")){
-            prefs.edit().putInt("adb_tile",0).apply();
+        if (!prefs.contains(ADB_TILE_PREF_KEY)){
+            prefs.edit().putInt(ADB_TILE_PREF_KEY,0).apply();
         }
         super.onTileAdded();
     }
@@ -32,7 +33,7 @@ public class AdbTile extends TileService {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
                 getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
-        editor.remove("adb_tile").apply();
+        editor.remove(ADB_TILE_PREF_KEY).apply();
         super.onTileRemoved();
     }
 
@@ -41,21 +42,21 @@ public class AdbTile extends TileService {
         Tile tile = getQsTile();
         Context context = getApplicationContext();
         SharedPreferences prefs = preferences(context);
-        switch (prefs.getInt("adb_tile",0)){
+        switch (prefs.getInt(ADB_TILE_PREF_KEY,0)){
             case 0:
                 enableAdb();
                 Toast.makeText(context, String.format("Run 'adb connect %s:5555' in terminal", getIP(context))
                         , Toast.LENGTH_LONG).show();
                 tile.setLabel(String.format("%s:5555", getIP(context)));
                 tile.setIcon(Icon.createWithResource(context,R.drawable.ic_qs_network_adb_on));
-                prefs.edit().putInt("adb_tile",1).apply();
+                prefs.edit().putInt(ADB_TILE_PREF_KEY,1).apply();
                 tile.updateTile();
                 break;
             case 1:
                 disableAdb();
                 tile.setLabel(getString(R.string.adb_tile_title));
                 tile.setIcon(Icon.createWithResource(context,R.drawable.ic_qs_network_adb_off));
-                prefs.edit().putInt("adb_tile",0).apply();
+                prefs.edit().putInt(ADB_TILE_PREF_KEY,0).apply();
                 tile.updateTile();
         }
     }
